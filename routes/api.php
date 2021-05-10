@@ -24,6 +24,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('buyers', 'Buyer\BuyerController', ['only' => ['index', 'show']]);
 
 /**
+ * Sellers
+ */
+Route::resource('sellers', 'Seller\SellerController', ['only' => ['index', 'show']]);
+
+/**
  * Categories
  */
 Route::resource('categories', 'Category\CategoryController', ['except' => ['create', 'edit']]);
