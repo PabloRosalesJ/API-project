@@ -44,7 +44,7 @@ class UserController extends ApiController
 
         $user = User::create($data);
 
-        return response()->json(['data' => $user], 201);
+        return $this->showOne($user, 201);
     }
 
     /**
@@ -89,29 +89,23 @@ class UserController extends ApiController
 
         if ($request->has('admin')) {
             if (!$user->isVerified()) {
-                return response()->json(
-                    [
-                        'error' => 'Se requiere ser usuario veriificado para cambiar estado de administración',
-                        'code' => 409
-                    ],
+                return $this->errorResponse(
+                    'Se requiere ser usuario veriificado para cambiar estado de administración',
                     409
                 );
             }
         }
 
         if (!$user->isDirty()) {
-            return response()->json(
-                [
-                    'error' => 'Especifica almenos un campo para actualizar',
-                    'code' => 422
-                ],
+            return $this->errorResponse(
+                'Especifica almenos un campo para actualizar',
                 422
             );
         }
 
         $user->update($data);
 
-        return response()->json(['data' => $user], 200);
+        return $this->showOne($user);
 
     }
 
@@ -124,6 +118,6 @@ class UserController extends ApiController
     public function destroy(User $user)
     {
         $user->delete();
-        return response()->json(['data' => $user], 204);
+        return $this->showOne($user);
     }
 }

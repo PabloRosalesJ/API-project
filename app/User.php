@@ -43,6 +43,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'verification_token',
+        'admin',
     ];
 
     /**

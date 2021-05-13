@@ -22,7 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('status')->default(Product::PRODUCTO_DISPONIBLE);
             $table->string('image');
             //$table->unsignedInteger('seller_id');
-            $table->foreignId('seller_id')->constrained('users');
+            $table->foreignId('seller_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
 
