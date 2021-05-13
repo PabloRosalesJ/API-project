@@ -44,6 +44,7 @@ class User extends Authenticatable
         'remember_token',
         'verification_token',
         'admin',
+        'deleted_at',
     ];
 
     /**
@@ -52,6 +53,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
+        'created_at' => 'date:d-m-Y H:i:s',
+        'updated_at' => 'date:d-m-Y H:i:s',
         'email_verified_at' => 'datetime',
     ];
 
