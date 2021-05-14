@@ -27,7 +27,7 @@ trait ApiResponser {
     protected function showAll(Collection $collection, $code = 200)
     {
         if ($collection->isEmpty()) {
-            abort(404);
+            return $this->errorResponse('No se encontó información para el recurso solicitado', 404);
         }
 
         return response()->json(
