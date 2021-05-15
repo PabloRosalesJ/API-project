@@ -44,7 +44,7 @@ class User extends Authenticatable
         'remember_token',
         'verification_token',
         'admin',
-        'deleted_at',
+        //'deleted_at',
     ];
 
     /**

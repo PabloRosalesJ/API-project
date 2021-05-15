@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
+use phpDocumentor\Reflection\Types\This;
 
 class Product extends BaseModel
 {
@@ -19,6 +20,22 @@ class Product extends BaseModel
         'image',
         'seller_id',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating( function ($product)
+            {
+                if ($product->quantity == 0 && $product->isAvailable()) {
+
+                    $product->status = Product::PRODUCTO_NO_DISPONIBLE;
+                    $product->save();
+
+                }
+            }
+        );
+    }
 
     public function isAvailable()
     {

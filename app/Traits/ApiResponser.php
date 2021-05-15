@@ -27,7 +27,7 @@ trait ApiResponser {
     protected function showAll(Collection $collection, $code = 200)
     {
         if ($collection->isEmpty()) {
-            return $this->errorResponse('No se encontó información para el recurso solicitado', 404);
+            return $this->showEmptyCollection('No se encontó información para el recurso solicitado');
         }
 
         return response()->json(
@@ -42,6 +42,17 @@ trait ApiResponser {
     protected function showOne(Model $instance, $code = 200)
     {
         return response()->json(['data' => $instance], $code);
+    }
+
+    protected function showEmptyCollection($message, $code = 404)
+    {
+        return response()->json(
+            [
+                'message' => $message,
+                'data' => []
+            ],
+            $code
+        );
     }
 
 }
