@@ -13,7 +13,7 @@ class BaseModel extends Model
     ];
 
     protected $hidden = [
-        'deleted_at',
+        //'deleted_at',
         'pivot'
     ];
 }
