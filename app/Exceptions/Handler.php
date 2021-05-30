@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
+use Illuminate\Session\TokenMismatchException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -102,6 +103,10 @@ class Handler extends ExceptionHandler
             }
         }
 
+        if ($exception instanceof TokenMismatchException) {
+            return redirect()->back()->withInput($request->all());
+        }
+
         if (config('app.debug')) {
             return parent::render($request, $exception);
         }
@@ -120,6 +125,11 @@ class Handler extends ExceptionHandler
     {
         $errors = $e->validator->errors()->getMessages();
 
+        if ($this->fromWeb($request)) {
+            return $request->ajax() ? response()->json($errors, 422)
+                : redirect()->back()->withInput($request->all())->withErrors($errors);
+        }
+
         return $this->errorResponse($errors, 422);
     }
 
@@ -132,6 +142,14 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
+        if ($this->fromWeb($request)) {
+            return redirect()->guest('login');
+        }
         return $this->errorResponse('No autenticado', 401);
+    }
+
+    protected function fromWeb($request){
+        return $request->acceptsHtml() &&
+            collect($request->route()->middleware())->contains('web');
     }
 }
