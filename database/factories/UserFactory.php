@@ -24,14 +24,16 @@ use Ramsey\Uuid\Builder\BuilderCollection;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $verificado = $faker->randomElement([User::USER_VERIFIED, User::USER_NOT_VERIFIED]);
+
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
+        'email_verified_at' => ($verificado == User::USER_VERIFIED) ? now() : null ,
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
-        'verified' => $verificado = $faker->randomElement([User::USER_VERIFIED, User::USER_NOT_VERIFIED]),
-        'verification_token' => $verificado == User::USER_NOT_VERIFIED ? null : User::generateVerificationToken(),
+        'verified' => $verificado,
+        'verification_token' => $verificado == User::USER_VERIFIED ? null : User::generateVerificationToken(),
         'admin' => $verificado = $faker->randomElement([User::USER_ADMIN, User::USER_NOT_ADMIN]),
     ];
 });

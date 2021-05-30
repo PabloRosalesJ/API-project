@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Mail\UserCreated;
+use App\Mail\UserMailChanged;
 use Illuminate\Support\Str;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -43,7 +46,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'verification_token',
-        'admin',
+        //'admin',
         //'deleted_at',
     ];
 
@@ -55,8 +58,33 @@ class User extends Authenticatable
     protected $casts = [
         'created_at' => 'date:d-m-Y H:i:s',
         'updated_at' => 'date:d-m-Y H:i:s',
-        'email_verified_at' => 'datetime',
+        'deleted_at' => 'date:d-m-Y H:i:s',
+        'email_verified_at' => 'date:d-m-Y H:i:s'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user)
+            {
+                retry(3, function() use($user){
+                    Mail::to($user)->send(new UserCreated($user));
+                }, 1000);
+            }
+        );
+
+        static::updating( function($user)
+            {
+                if ($user->isDirty('email'))
+                {
+                    retry(3, function() use ($user){
+                        Mail::to($user)->send(new UserMailChanged($user));
+                    }, 1000);
+                }
+            }
+        );
+    }
 
     public function setNameAttribute($attribute)
     {

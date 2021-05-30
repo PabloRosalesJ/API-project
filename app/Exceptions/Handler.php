@@ -8,6 +8,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -67,7 +68,7 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ModelNotFoundException) {
             $modelo = strtolower(class_basename($exception->getModel()));
 
-            return $this->errorResponse("No existe inguna instancia de modelo $modelo con el id especificado.", 404);
+            return $this->errorResponse("No existe ninguna instancia de modelo $modelo con el id especificado.", 404);
         }
         if ($exception instanceof AuthenticationException) {
             return $this->unauthenticated($request, $exception);
@@ -87,6 +88,10 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof HttpException) {
             return $this->errorResponse($exception->getMessage(), $exception->getStatusCode());
+        }
+
+        if ($exception instanceof ThrottleRequestsException) {
+            return $this->errorResponse('Too Many Attempts.', 429);
         }
 
         if ($exception instanceof QueryException) {

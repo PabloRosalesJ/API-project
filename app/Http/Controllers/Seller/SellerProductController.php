@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ApiController;
 use App\Product;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class SellerProductController extends ApiController
@@ -38,9 +39,9 @@ class SellerProductController extends ApiController
             'image' => 'required|image',
         ]);
 
-        $data['image'] = 'Image 3.png';
-        $data['status'] = Product::PRODUCTO_NO_DISPONIBLE;
+        $data['image'] = $request->file('image')->store('');
         $data['seller_id'] = $seller->id;
+        $data['status'] = Product::PRODUCTO_NO_DISPONIBLE;
 
         $product = Product::create($data);
 
@@ -67,10 +68,6 @@ class SellerProductController extends ApiController
             'status' => 'in:'. Product::PRODUCTO_DISPONIBLE .',' . Product::PRODUCTO_NO_DISPONIBLE
         ]);
 
-        $data['image'] = 'Image 3.png';
-
-        $product->fill($data);
-
         if ($request->has('status')) {
 
             $product->status = $request->status;
@@ -83,6 +80,16 @@ class SellerProductController extends ApiController
             }
 
         }
+
+        if ($request->hasFile('image')) {
+
+            Storage::delete($product->image);
+
+            $data['image'] = $data['image']->store('');
+
+        }
+
+        $product->fill($data);
 
         if ($product->isClean()) {
             return $this->errorResponse(
@@ -106,7 +113,7 @@ class SellerProductController extends ApiController
     public function destroy(Seller $seller, Product $product)
     {
         $this->canBeUpdatedByThisSeller($product, $seller);
-
+        Storage::delete($product->image);
         $product->delete();
 
         return $this->showOne($product);
