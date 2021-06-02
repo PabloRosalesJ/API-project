@@ -1,0 +1,1172 @@
+{
+	"info": {
+		"_postman_id": "7021cfc8-122e-4b27-8f15-f534c815a528",
+		"name": "Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users.all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/users?sort_by=email&verified=1&admin=true&pre_page=30",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"users"
+					],
+					"query": [
+						{
+							"key": "sort_by",
+							"value": "email"
+						},
+						{
+							"key": "verified",
+							"value": "1"
+						},
+						{
+							"key": "admin",
+							"value": "true"
+						},
+						{
+							"key": "pre_page",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User.show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/users/1",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User.create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Pablo Rosales",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pablo@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12312300",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "12312300",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/users",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User.update",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Pablo Rosales J",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pablo@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12312300",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "12312300",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/users/201",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"201"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User.delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/users/201",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"201"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/sellers",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/sellers/1",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buyers.all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/buyers/",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"buyers",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buyers.show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/buyers/2",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"buyers",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories.all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMWNmZmYxYmI5Y2EzN2Y3N2U0ZDNkYjVlZTFmZTYyY2M0MTU4ZjgzZmEzYmI4OGMzNTQyOTExMWJmMjI4MTk4NzcxZDE0MmE5MDQ0ODkwMGYiLCJpYXQiOjE2MjI0MTk5MDcuNjUwNjM5LCJuYmYiOjE2MjI0MTk5MDcuNjUwNjc5LCJleHAiOjE2MjI0MjM1MDcuNDQ5NjY3LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.x98W6W0BOaUslmz0KBVT2Bey1Bg6VRR9otNjtwCSQPm26HLQNZlhhgsTxBCmAim9aq4LsNst0wqLNB1GiHBNbE_TrvxPsYC_6TJ8uwarRbt-eg6RWS8QzsKGe2tS56lA4S3oZbx1upOub0VqeHxKa-KtnjTaGhoL-VvowhnIeUVHMU2ejabEkN0yQGslY64-MRlgSZPf5oGG-xTNxZ0k5h3X4tm0WCMdEiPZ7vbvsRnY2seoZi1jReS5JIP7H50HQq7A7iyZ56daF-5s1tWmPUS15rf4rv-Oe3rc5j0cm_4G15srIkTthbYIS2l3dGs9RYQuYuJOR1bSwdXltIr6SwcMM96PC2MWXf3675KR7pRQlKVHhkQ_qxqA0ap0ZhweBWcceTO72NajEJDLIzt4iMqc8XxoOdq9xyyv_87aqompfX3PXmQXeUa3YG5iSn5oWCrEZelhih1aq5E5yMgnBKfsW4yhjffZDWAqTwgrS7IB3YkbeOpvgJKaokiRwdZfqu5fG2CpwjXQZeD0BywD9ROcHxvY9woD8T1A1DzlI3S1zl7NK3XISktSQVJj_KhBO6UWw_Y6WverflkfoKUZvmRcU2qFT6diocvXcGLNhmFPfEeVLaLTvSINIwaxk8QLj1qNDWnOzm0k3uNZuhAVL6N_iTPhMON_7Wjwcaa9jwA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Autorization",
+							"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIzIiwianRpIjoiMWNmZmYxYmI5Y2EzN2Y3N2U0ZDNkYjVlZTFmZTYyY2M0MTU4ZjgzZmEzYmI4OGMzNTQyOTExMWJmMjI4MTk4NzcxZDE0MmE5MDQ0ODkwMGYiLCJpYXQiOjE2MjI0MTk5MDcuNjUwNjM5LCJuYmYiOjE2MjI0MTk5MDcuNjUwNjc5LCJleHAiOjE2MjI0MjM1MDcuNDQ5NjY3LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.x98W6W0BOaUslmz0KBVT2Bey1Bg6VRR9otNjtwCSQPm26HLQNZlhhgsTxBCmAim9aq4LsNst0wqLNB1GiHBNbE_TrvxPsYC_6TJ8uwarRbt-eg6RWS8QzsKGe2tS56lA4S3oZbx1upOub0VqeHxKa-KtnjTaGhoL-VvowhnIeUVHMU2ejabEkN0yQGslY64-MRlgSZPf5oGG-xTNxZ0k5h3X4tm0WCMdEiPZ7vbvsRnY2seoZi1jReS5JIP7H50HQq7A7iyZ56daF-5s1tWmPUS15rf4rv-Oe3rc5j0cm_4G15srIkTthbYIS2l3dGs9RYQuYuJOR1bSwdXltIr6SwcMM96PC2MWXf3675KR7pRQlKVHhkQ_qxqA0ap0ZhweBWcceTO72NajEJDLIzt4iMqc8XxoOdq9xyyv_87aqompfX3PXmQXeUa3YG5iSn5oWCrEZelhih1aq5E5yMgnBKfsW4yhjffZDWAqTwgrS7IB3YkbeOpvgJKaokiRwdZfqu5fG2CpwjXQZeD0BywD9ROcHxvY9woD8T1A1DzlI3S1zl7NK3XISktSQVJj_KhBO6UWw_Y6WverflkfoKUZvmRcU2qFT6diocvXcGLNhmFPfEeVLaLTvSINIwaxk8QLj1qNDWnOzm0k3uNZuhAVL6N_iTPhMON_7Wjwcaa9jwA",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories.show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/categories/30",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories.create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "mi categoria",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "mi categoria description",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories.update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "updated",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Quasi corrupti modi qui vel updated",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/categories/30",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"30"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories.delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "updated 3 time",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Quasi corrupti modi qui vel updated",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/categories/33",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"33"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products.all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/products",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product.show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/products/1000",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions.all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/transactions",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions.show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/transactions/1",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"transactions",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions.categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/transactions/1/categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"transactions",
+						"1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transactions.sellers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/transactions/1/sellers",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"transactions",
+						"1",
+						"sellers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buyers.transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/buyers/744/transactions",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"buyers",
+						"744",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buyers.products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/buyers/12/products",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"buyers",
+						"12",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buyers.sellers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/buyers/3/sellers",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"buyers",
+						"3",
+						"sellers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buyers.categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/buyers/2/categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"buyers",
+						"2",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories.products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/categories/1/products",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories.transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/categories/3/transactions",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"3",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Categories.buyers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/categories/1/buyers",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"categories",
+						"1",
+						"buyers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/sellers/1/transactions",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers",
+						"1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/sellers/1/categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers",
+						"1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.buyers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/sellers/12/buyers",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers",
+						"12",
+						"buyers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.products.all",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/sellers/1/products",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers",
+						"1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.products.create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Producto del seller 3 ",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "my description",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/J:/ProgramFiles/laragon/www/api/public/img/Image 3.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/sellers/3/products",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers",
+						"3",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.products.update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Producto del seller 3 ",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "my description",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/J:/ProgramFiles/laragon/www/api/public/img/Image 3.png"
+						},
+						{
+							"key": "_method",
+							"value": "put",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/sellers/3/products/1002",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers",
+						"3",
+						"products",
+						"1002"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sellers.products.delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Producto del seller 3 name updated",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "my description",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"value": "image",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "disponible",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/sellers/1/products/1007",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"sellers",
+						"1",
+						"products",
+						"1007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products.transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/products/1/transactions",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products.buyers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/products/1/buyers",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1",
+						"buyers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products.categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/products/1/categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products.categories.update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/products/1/categories",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1",
+						"categories"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products.categories.delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/products/1/categories/11",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1",
+						"categories",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Products.buyers.transactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "quantity",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/api/products/1/buyers/1/transactions",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"products",
+						"1",
+						"buyers",
+						"1",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users.verify",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/users/verify/70Ur5qyLSPRUu4I5ahkUjUaMXLfN9ukfCVRpSwZT",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"verify",
+						"70Ur5qyLSPRUu4I5ahkUjUaMXLfN9ukfCVRpSwZT"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users.verify.resend",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{endpoint}}/api/users/1/resend",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"1",
+						"resend"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "oauth/token",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "1ttHZQJcGDGZQyrjDnarKQoBGx7lZQl3FhCakeng",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/oauth/token",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				},
+				"description": "send on the body: grant_type, client_id, client_secret"
+			},
+			"response": []
+		},
+		{
+			"name": "token.password",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "4",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "tjrecSeelnBsJFVgJBjgv8Pvz5QVR1YlEjTyYVDP",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "yoopigr09@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12312300",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{endpoint}}/oauth/token",
+					"host": [
+						"{{endpoint}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -2,13 +2,27 @@
 
 namespace App;
 
+use App\Mail\UserCreated;
+use Illuminate\Support\Str;
+use App\Mail\UserMailChanged;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable, SoftDeletes;
+
+    const USER_VERIFIED = '1';
+    const USER_NOT_VERIFIED = '0';
+
+    const USER_ADMIN = 'true';
+    const USER_NOT_ADMIN = 'false';
+
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +30,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'verified',
+        'verification_token',
+        'admin',
     ];
 
     /**
@@ -25,7 +44,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
+        'verification_token',
+        //'admin',
+        //'deleted_at',
     ];
 
     /**
@@ -34,6 +57,63 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'created_at' => 'date:d-m-Y H:i:s',
+        'updated_at' => 'date:d-m-Y H:i:s',
+        'deleted_at' => 'date:d-m-Y H:i:s',
+        'email_verified_at' => 'date:d-m-Y H:i:s'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($user)
+            {
+                retry(3, function() use($user){
+                    Mail::to($user)->send(new UserCreated($user));
+                }, 1000);
+            }
+        );
+
+        static::updating( function($user)
+            {
+                if ($user->isDirty('email'))
+                {
+                    retry(3, function() use ($user){
+                        Mail::to($user)->send(new UserMailChanged($user));
+                    }, 1000);
+                }
+            }
+        );
+    }
+
+    public function setNameAttribute($attribute)
+    {
+        $this->attributes['name'] = strtolower($attribute);
+    }
+
+    public function getNameAttribute($attribute)
+    {
+        return ucwords($attribute);
+    }
+
+    public function setEmailAttribute($attribute)
+    {
+        $this->attributes['email'] = strtolower($attribute);
+    }
+
+    public function isVerified(){
+        return $this->verified == User::USER_VERIFIED;
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin == User::USER_ADMIN;
+    }
+
+    public static function generateVerificationToken()
+    {
+        return Str::random(40);
+    }
+
 }
