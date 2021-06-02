@@ -12,6 +12,12 @@ use Symfony\Component\VarDumper\Cloner\Data;
 
 class ProductBuyerTransactionController extends ApiController
 {
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Mail;
 
 class UserController extends ApiController
 {
+
+    public function __construct()
+    {
+        $this->middleware('client.credentials')->only(['store', 'resend']);
+        $this->middleware('auth:api')->except(['resend', 'store', 'verify']);
+    }
+
     /**
      * Display a listing of the resource.
      *

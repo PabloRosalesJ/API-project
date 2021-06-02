@@ -21,8 +21,26 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+
+
+
+
+
+
+     public function index()
     {
         return view('home');
+    }
+
+    public function  getTokens(){
+        return view('oauth.personal-tokens');
+    }
+
+    public function  getClients(){
+        return view('oauth.personal-clients');
+    }
+
+    public function  getAuthorizedClients(){
+        return view('oauth.authorized-clients');
     }
 }
